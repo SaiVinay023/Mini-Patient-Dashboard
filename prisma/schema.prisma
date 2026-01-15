@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Patient {
-  id         String      @id @default(uuid())
+  id         Int          @id @default(uuid())
   name       String
   age        Int
   email      String?
@@ -19,8 +19,8 @@ model Patient {
 }
 
 model Treatment {
-  id         String   @id @default(uuid())
-  patientId  String
+  id         Int          @id @default(autoincrement())
+  patientId  Int
   type       String
   date       DateTime
   notes      String?
