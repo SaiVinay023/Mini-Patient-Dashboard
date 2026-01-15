@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "Patient" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL,
     "age" INTEGER NOT NULL,
     "email" TEXT
@@ -8,8 +8,8 @@ CREATE TABLE "Patient" (
 
 -- CreateTable
 CREATE TABLE "Treatment" (
-    "id" TEXT NOT NULL PRIMARY KEY,
-    "patientId" TEXT NOT NULL,
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "patientId" INTEGER NOT NULL,
     "type" TEXT NOT NULL,
     "date" DATETIME NOT NULL,
     "notes" TEXT,
