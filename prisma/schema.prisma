@@ -10,5 +10,22 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
+}
+
+model Patient {
+  id         String      @id @default(uuid())
+  name       String
+  age        Int
+  email      String?
+  treatments Treatment[]
+}
+
+model Treatment {
+  id         String   @id @default(uuid())
+  patientId  String
+  type       String
+  date       DateTime
+  notes      String?
+  patient    Patient  @relation(fields: [patientId], references: [id])
 }

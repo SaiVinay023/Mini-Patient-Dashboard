@@ -31,7 +31,11 @@ pnpm-debug.log*
 
 # MacOS
 .DS_Store
+Thumbs.db
 
 # Temporary files
 *.log
 *.tmp
+
+# Prisma generated client
+src/generated/prisma/
