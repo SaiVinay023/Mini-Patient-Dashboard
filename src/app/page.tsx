@@ -1,53 +1,32 @@
 // src/app/page.tsx
 "use client";
 import { useState } from 'react';
+import { useGetPatientsQuery } from '../features/patients/patientsApi';
+import PatientCard from '../components/PatientCard';
 
-type Patient = {
-  id: string;
-  name: string;
-  age: number;
-};
-
-// Temporary mock data until API is connected
-const mockPatients: Patient[] = [
-  { id: '1', name: 'John Doe', age: 30 },
-  { id: '2', name: 'Jane Smith', age: 25 },
-  { id: '3', name: 'Alice Johnson', age: 40 },
-];
 
 export default function HomePage() {
-  const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
+  const { data: patients, isLoading } = useGetPatientsQuery();
+  const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
+
+   if (isLoading) {
+    return <p className="text-center mt-8">Loading patients...</p>;
+  }
 
   return (
-    <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-      <h1>Mini Patient Dashboard</h1>
-
-      {!selectedPatient ? (
-        <>
-          <h2>Patients</h2>
-          <ul>
-            {mockPatients.map((patient) => (
-              <li
-                key={patient.id}
-                style={{ cursor: 'pointer', marginBottom: '0.5rem' }}
-                onClick={() => setSelectedPatient(patient)}
-              >
-                {patient.name} - Age {patient.age}
-              </li>
+      <div className="flex flex-col md:flex-row gap-4">
+        <div className="md:w-1/3">
+        <h2 className="text-xl font-bold mb-4">Patients</h2>
+        <div className="space-y-2">
+          {patients?.map((patient) => (
+            <PatientCard
+              key={patient.id}
+              patient={patient}
+              onClick={() => setSelectedPatientId(patient.id)}
+            />
             ))}
-          </ul>
-        </>
-      ) : (
-        <>
-          <button onClick={() => setSelectedPatient(null)}>Back to Patients</button>
-          <h2>{selectedPatient.name}'s Treatments</h2>
-          <ul>
-            <li>Cleaning - 2025-01-10</li>
-            <li>Filling - 2025-01-15</li>
-            <li>Checkup - 2025-01-20</li>
-          </ul>
-        </>
-      )}
-    </div>
-  );
-}
+        </div>
+        </div>
+        </div>
+       );
+       }
