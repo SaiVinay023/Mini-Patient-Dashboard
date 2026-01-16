@@ -3,10 +3,13 @@ import { prisma } from '@/lib/prisma';
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const patientId = parseInt(params.id, 10);
+    const { id } = await params;
+    const patientId = parseInt(id, 10);
+
+    console.log('Treatments API - Received ID:', id, 'Parsed:', patientId);
 
     if (isNaN(patientId)) {
       return NextResponse.json(
@@ -20,6 +23,7 @@ export async function GET(
       orderBy: { date: 'desc' },
     });
 
+    console.log(`Fetched treatments for patient ${patientId}:`, treatments);
     return NextResponse.json(treatments);
   } catch (error) {
     console.error('Error fetching treatments:', error);
