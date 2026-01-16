@@ -2,6 +2,13 @@
 
 A modern web application for managing patient information and treatment history. Built with Next.js 16, React 19, and Prisma ORM with SQLite database.
 
+
+
+
+https://github.com/user-attachments/assets/b9e171cf-c421-4984-98d1-75503d3301be
+
+
+
 ## 📱 Responsive Design
 
 This dashboard is fully responsive using **Tailwind CSS** with a mobile-first approach, providing an optimal experience across all devices.
