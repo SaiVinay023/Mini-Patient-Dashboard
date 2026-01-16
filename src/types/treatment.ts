@@ -3,7 +3,7 @@ export interface Treatment {
   patientId: number;
   type: string;
   date: string;
-  notes?: string;
+  notes?: string | null;
 }
 
 // Additional interface for filtering treatments

@@ -109,7 +109,7 @@ const filteredTreatments = filterTreatments(treatments, filterType, filterStartD
     <p className="font-medium">
       No treatments found
     </p>
-    {(filterType || filterDate) ? (
+    {(filterType || filterStartDate || filterEndDate) ? (
       <p className="text-sm mt-2">
         Try clearing or adjusting your filters.
       </p>
