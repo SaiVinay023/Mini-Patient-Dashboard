@@ -1,20 +1,18 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
+export async function GET(
+  request: Request,
+  { params }: { params: { id: string } }
 ) {
-  if (req.method !== 'GET') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
   try {
-    const { id } = req.query;
-    const patientId = parseInt(id as string, 10);
+    const patientId = parseInt(params.id, 10);
 
     if (isNaN(patientId)) {
-      return res.status(400).json({ error: 'Invalid patient ID' });
+      return NextResponse.json(
+        { error: 'Invalid patient ID' },
+        { status: 400 }
+      );
     }
 
     const treatments = await prisma.treatment.findMany({
@@ -22,10 +20,12 @@ export default async function handler(
       orderBy: { date: 'desc' },
     });
 
-    console.log(`Fetched treatments for patient ${patientId}:`, treatments);
-    return res.status(200).json(treatments);
+    return NextResponse.json(treatments);
   } catch (error) {
     console.error('Error fetching treatments:', error);
-    return res.status(500).json({ error: 'Failed to fetch treatments' });
+    return NextResponse.json(
+      { error: 'Failed to fetch treatments' },
+      { status: 500 }
+    );
   }
 }
