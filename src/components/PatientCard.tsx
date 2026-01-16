@@ -10,17 +10,17 @@ interface PatientCardProps {
 
 export default function PatientCard({ patient, isSelected, onClick }: PatientCardProps) {
   return (
-    <div
+    <button
       onClick={onClick}
-      className={`p-4 border rounded-lg cursor-pointer transition-colors ${
+      className={`w-full text-left p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md active:scale-95 ${
         isSelected
-          ? 'bg-blue-50 border-blue-500'
-          : 'hover:bg-gray-50 border-gray-300'
+          ? 'border-blue-500 bg-blue-50 shadow-md'
+          : 'border-gray-300 bg-white hover:border-blue-300 hover:bg-blue-50'
       }`}
     >
-      <h3 className="font-semibold text-lg">{patient.name}</h3>
-      <p className="text-gray-600 text-sm">Age: {patient.age}</p>
-      {patient.email && <p className="text-gray-600 text-sm">{patient.email}</p>}
-    </div>
+      <h3 className="font-bold text-lg text-gray-800">{patient.name}</h3>
+      <p className="text-gray-600 text-sm mt-1">Age: {patient.age}</p>
+      {patient.email && <p className="text-gray-500 text-xs mt-1">{patient.email}</p>}
+    </button>
   );
 }
