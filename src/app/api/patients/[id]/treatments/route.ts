@@ -9,21 +9,27 @@ export async function GET(
     const { id } = await params;
     const patientId = parseInt(id, 10);
 
-    console.log('Treatments API - Received ID:', id, 'Parsed:', patientId);
-
     if (isNaN(patientId)) {
       return NextResponse.json(
         { error: 'Invalid patient ID' },
         { status: 400 }
       );
     }
+    const patient = await prisma.patient.findUnique({
+  where: { id: patientId },
+});
 
+  if (!patient) {
+      return NextResponse.json(
+        { error: 'Patient not found' },
+        { status: 404 }
+    );
+}
     const treatments = await prisma.treatment.findMany({
       where: { patientId },
       orderBy: { date: 'desc' },
     });
-
-    console.log(`Fetched treatments for patient ${patientId}:`, treatments);
+    
     return NextResponse.json(treatments);
   } catch (error) {
     console.error('Error fetching treatments:', error);

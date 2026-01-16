@@ -10,6 +10,7 @@ datasource db {
   
 }
 
+// A patient of the dental practice
 model Patient {
   id         Int          @id @default(autoincrement())
   name       String
@@ -18,6 +19,7 @@ model Patient {
   treatments Treatment[]
 }
 
+// A single treatment record for a patient
 model Treatment {
   id         Int          @id @default(autoincrement())
   patientId  Int

@@ -10,9 +10,6 @@ export default function HomePage() {
   const { data: patients, isLoading, error } = useGetPatientsQuery();
   const [selectedPatientId, setSelectedPatientId] = useState<number | null>(null);
 
-  console.log('Patients data:', patients);
-  console.log('Loading:', isLoading);
-  console.log('Error:', error);
 
   if (isLoading) {
     return <p className="text-center mt-8">Loading patients...</p>;

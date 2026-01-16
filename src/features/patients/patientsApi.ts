@@ -11,9 +11,10 @@ export const patientsApi = createApi({
             query: () => 'patients',
             providesTags: ['Patients'],
         }),
+        // Fetch treatments for a given patient. Cached and keyed by patientId.
         getTreatments: builder.query<Treatment[], number>({
             query: (patientId) => `patients/${patientId}/treatments`,
-            provideTags: (result)   =>
+            provideTags: (result) =>
                 result
                     ? result.map((t) => ({ type: 'Treatments' as const, id: t.id }))
                     : ['Treatments'],
