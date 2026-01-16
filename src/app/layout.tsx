@@ -1,7 +1,7 @@
 // src/app/layout.tsx
 
 import { ReactNode } from 'react';
-import { Providers } from './Providers';
+import { Providers } from './providers';
 
 
 export const metadata = {
