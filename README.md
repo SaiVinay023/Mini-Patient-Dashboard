@@ -66,14 +66,18 @@ All responsive classes follow the mobile-first principle:
 - npm or yarn
 - Git
 
-## 🚀 Getting Started
+# 🚀 Getting Started
 
+
+```markdown
 ### 1. Clone the Repository
+
+Run the following commands:
 
 ```bash
 git clone https://github.com/SaiVinay023/Mini-Patient-Dashboard.git
 cd Mini-Patient-Dashboard
-```
+
 
 ### 2. Install Dependencies
 
