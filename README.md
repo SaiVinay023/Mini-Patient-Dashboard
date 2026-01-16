@@ -2,6 +2,29 @@
 
 A modern web application for managing patient information and treatment history. Built with Next.js 16, React 19, and Prisma ORM with SQLite database.
 
+## 📱 Responsive Design
+
+This dashboard is fully responsive using **Tailwind CSS** with a mobile-first approach, providing an optimal experience across all devices.
+
+### Device Breakpoints
+
+| Device | Width | Layout |
+|--------|-------|--------|
+| Mobile | 320-640px | Single column, stacked |
+| Tablet | 640-1024px | Two columns side-by-side |
+| Desktop | 1024px+ | Three columns with sticky sidebar |
+
+### Mobile-First Architecture
+
+All responsive classes follow the mobile-first principle:
+
+```tsx
+// Mobile default, enhanced for larger screens
+<div className="text-sm sm:text-base md:text-lg">
+<div className="p-4 sm:p-5 md:p-6">
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+
+
 ## 🎯 Features
 
 - ✅ **Patient Management** - View and manage patient records
@@ -248,6 +271,15 @@ npm run prisma:migrate
 { params }: { params: Promise<{ id: string }> }
 const { id } = await params;
 ```
+
+## Browser Support
+
+✓ Chrome/Chromium (latest)
+✓ Firefox (latest)
+✓ Safari (latest)
+✓ Edge (latest)
+✓ Mobile browsers (iOS Safari, Chrome Mobile)
+
 
 ## 🚀 Deployment
 

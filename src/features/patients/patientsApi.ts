@@ -9,7 +9,7 @@ export const patientsApi = createApi({
     endpoints: (builder) => ({
         getPatients: builder.query<Patient[], void>({
             query: () => 'patients',
-            providesTags: ['Patients'],
+            providesTags: ['Patients'], // Providetags for caching and invalidation, not using in current project but can be scaled
         }),
         // Fetch treatments for a given patient. Cached and keyed by patientId.
         getTreatments: builder.query<Treatment[], number>({
