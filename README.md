@@ -27,7 +27,7 @@ A modern web application for managing patient information and treatment history.
 
 ### Database
 - **ORM:** Prisma 6.14.0
-- **Database:** SQLite with LibSQL adapter
+- **Database:** SQLite via Prisma ORM
 - **Models:** Patient, Treatment
 
 ## 📋 Prerequisites
@@ -53,25 +53,25 @@ npm install
 
 ### 3. Setup Environment Variables
 
-Create a `.env.local` file in the project root:
+Create a `.env` file in the project root:
 
 ```bash
-echo 'DATABASE_URL="file:./dev.db"' > .env.local
+echo 'DATABASE_URL="file:./dev.db"' > .env
 ```
 
 ### 4. Initialize Database
 
-Generate Prisma client:
+First, generate the Prisma client:
 ```bash
 npm run prisma:generate
 ```
 
-Create database tables:
+Then create the database tables:
 ```bash
 npm run prisma:migrate
 ```
 
-Seed sample data:
+Finally, Seed sample data:
 ```bash
 npm run seed
 ```
@@ -100,7 +100,7 @@ Mini-Patient-Dashboard/
 │   │   └── providers.tsx                 # Redux store provider
 │   ├── components/
 │   │   ├── PatientCard.tsx              # Patient list item component
-│   │   └── TreatmentList.tsx            # Treatment display component
+│   │   └── TreatmentList.tsx            # Treatment display component 
 │   ├── features/
 │   │   └── patients/
 │   │       └── patientsApi.ts           # RTK Query API slices
@@ -108,17 +108,20 @@ Mini-Patient-Dashboard/
 │   │   └── prisma.ts                    # Prisma client singleton
 │   ├── redux/
 │   │   └── store.ts                     # Redux store configuration
-│   └── types/
-│       ├── patient.ts                   # Patient interface
-│       └── treatment.ts                 # Treatment interface
+│   ├── types/
+│   │   ├── patient.ts                   # Patient interface
+│   │   └── treatment.ts                 # Treatment interface
+│   └── utils/                            # NEW FOLDER
+│       └── filterTreatments.ts          # Treatment filtering logic
 ├── prisma/
 │   ├── schema.prisma                    # Database schema
 │   ├── migrations/                      # Database migrations
 │   └── seed.ts                          # Seed script
-├── .env.local                           # Environment variables (create this)
+├── .env                                 # Environment variables 
 ├── package.json
 ├── tsconfig.json
 └── next.config.js
+
 ```
 
 ## 🔌 API Endpoints
@@ -228,7 +231,7 @@ npm run seed            # Seed database with sample data
 ## 🐛 Troubleshooting
 
 ### Error: "PrismaClientInitializationError"
-**Solution:** Make sure `.env.local` exists with `DATABASE_URL="file:./dev.db"`
+**Solution:** Make sure `.env` exists with `DATABASE_URL="file:./dev.db"`
 
 ### Error: "relation 'Patient' does not exist"
 **Solution:** Run database migrations:
@@ -264,12 +267,21 @@ For production deployments, consider using a hosted database instead of SQLite:
 
 Update `prisma/schema.prisma` to match your database provider.
 
-## 📝 Notes
+### What's Implemented
+- Read-only patient and treatment views (no create/update/delete)
+- Search and filter by treatment type and date (using both simultaneously)
+- Fully responsive UI (mobile & desktop)
+- Type-safe API responses with TypeScript
+- Implemented Prisma ORM, can be scalable
 
-- This is a demo/starter project for patient management
-- Sample data is seeded on first migration
-- All timestamps are stored in UTC
-- Email field is optional for patients
+
+### Demo Limitations
+- No authentication/authorization
+- No create/update/delete operations (read-only API)
+- SQLite for simplicity (suitable for dev; use PostgreSQL for production)
+- Sample data seeded on first migration
+- All timestamps stored in UTC
+- Email field is optional
 
 ## 🤝 Contributing
 
