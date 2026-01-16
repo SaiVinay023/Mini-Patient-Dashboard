@@ -15,8 +15,8 @@ export async function GET(
         { status: 400 }
       );
     }
-    const patient = await prisma.patient.findUnique({
-  where: { id: patientId },
+  const patient = await prisma.patient.findUnique({
+    where: { id: patientId },
 });
 
   if (!patient) {
@@ -27,7 +27,7 @@ export async function GET(
 }
     const treatments = await prisma.treatment.findMany({
       where: { patientId },
-      orderBy: { date: 'desc' },
+      orderBy: { date: 'desc' }, // Latest treatments first
     });
     
     return NextResponse.json(treatments);

@@ -3,7 +3,8 @@ import { Treatment } from '@/types/treatment';
 export function filterTreatments(
   treatments: Treatment[] | undefined,
   typeFilter: string,
-  dateFilter: string
+  startDateFilter: string,
+  endDateFilter: string
 ): Treatment[] {
   if (!treatments) return [];
 
@@ -12,10 +13,11 @@ export function filterTreatments(
       !typeFilter ||
       treatment.type.toLowerCase().includes(typeFilter.toLowerCase());
 
-    const matchesDate =
-      !dateFilter ||
-      new Date(treatment.date).toISOString().startsWith(dateFilter);
+    const treatmentDate = new Date(treatment.date).toISOString().split('T')[0];
+    const matchesStartDate = !startDateFilter || treatmentDate >= startDateFilter;
 
-    return matchesType && matchesDate;
+    const matchesEndDate = !endDateFilter || treatmentDate <= endDateFilter;
+
+    return matchesType && matchesStartDate && matchesEndDate;
   });
 }
