@@ -15,7 +15,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@libsql/client": "^0.17.0",
     "@prisma/adapter-libsql": "^7.2.0",
     "@prisma/client": "^6.19.2",
     "@reduxjs/toolkit": "^2.11.2",
@@ -33,7 +32,6 @@
   "devDependencies": {
     "@types/node": "25.0.9",
     "@types/react": "19.2.8",
-    "dotenv": "^17.2.3",
     "ts-node": "^10.9.2"
   }
 }
